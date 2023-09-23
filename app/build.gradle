@@ -4,16 +4,16 @@ plugins {
 }
 
 android {
-    namespace 'com.example.kaappbai'
-    compileSdk 33
-
     packagingOptions {
         resources.excludes.add("META-INF/*")
     }
+
+    namespace 'com.example.kaappbai'
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.example.kaappbai"
-        minSdk 24
-        targetSdk 33
+        minSdkVersion 24
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -25,7 +25,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-
     }
 
     compileOptions {
@@ -36,25 +35,42 @@ android {
 
 dependencies {
 
+
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.7.1'
+
+    // Firebase BOM for consistent versions
+    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+
+    // Firebase Core
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // Firebase Firestore
+    implementation 'com.google.firebase:firebase-firestore'
+
+    // Firebase Authentication
+    implementation 'com.google.firebase:firebase-auth'
+
+    // Firebase Cloud Messaging (FCM)
+    implementation 'com.google.firebase:firebase-messaging'
+
+    // Google Play services authentication
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+
+    // SendGrid API for email sending
+    implementation 'com.sendgrid:sendgrid-java:4.7.0'
+
+    // Test dependencies
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    //firebase
+    //http client
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation platform('com.google.firebase:firebase-bom:29.1.0')
-    implementation 'com.google.firebase:firebase-messaging:23.0.0'
-    implementation 'com.google.firebase:firebase-firestore:24.0.1'
-    implementation 'com.google.firebase:firebase-auth:19.2.0'
 
-    //google authentication
-    // implementation 'com.google.gms:google-services:4.3.15'
-    implementation 'com.google.api-client:google-api-client:1.33.0'
-    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.32.1'
-    implementation 'com.google.android.gms:play-services-auth:20.6.0'
 }
+
+// Add this at the bottom of the file
+apply plugin: 'com.google.gms.google-services'

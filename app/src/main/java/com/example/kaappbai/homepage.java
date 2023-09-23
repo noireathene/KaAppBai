@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class homepage extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class homepage extends AppCompatActivity {
          DrawerLayout drawerLayout;
          NavigationView navigationView;
          TextView navHeaderName;
-         Button chat;
+         ImageButton chat;
          ImageButton appointment;
 
 
@@ -61,6 +62,11 @@ public class homepage extends AppCompatActivity {
                         // Handle Settings
                     } else if (id == R.id.nav_about_us) {
                         // Handle About Us
+                    }else if (id == R.id.nav_logout) {
+                        // Handle Logout
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(homepage.this, login.class));
+                        finish();
                     }
                     // Close the navigation drawer after handling the click
                     drawerLayout.closeDrawer(GravityCompat.START);

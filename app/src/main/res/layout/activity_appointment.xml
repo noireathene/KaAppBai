@@ -1,9 +1,241 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- activity_home.xml -->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".appointment">
+    tools:context=".homepage"
+    >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Main content -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/homepage_header"
+            android:backgroundTint="#0b3954"
+            android:padding="20dp">
+
+
+            <TextView
+                android:id="@+id/tv_doctorname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:hint="Set an Appointment"
+                android:textColor="#ffff"
+                android:textColorHint="@color/white"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/Fragment"
+            android:layout_marginBottom="42dp"></FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_content_bottom_2"
+        android:layout_marginTop="1in"
+        android:padding="25dp">
+
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/Fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="0dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="Name:"
+                android:textAlignment="center"
+                android:textColor="#d703082b"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+            <EditText
+                android:layout_width="1.7in"
+                android:layout_height="40dp"
+                android:layout_marginLeft="75dp"
+                android:background="@color/white"
+                android:id="@+id/appointmentName"/>
+
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/Fragment1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="0dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="Course and year:"
+                android:textAlignment="center"
+                android:textColor="#d703082b"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+            <EditText
+                android:layout_width="1in"
+                android:layout_height="40dp"
+                android:layout_marginLeft="200dp"
+                android:background="@color/white"
+                android:id="@+id/course"/>
+
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/Fragment2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="0dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="Email:"
+                android:textAlignment="center"
+                android:textColor="#d703082b"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+            <EditText
+                android:layout_width="1.7in"
+                android:layout_height="40dp"
+                android:layout_marginLeft="75dp"
+                android:background="@color/white"
+                android:id="@+id/appointmentEmail"/>
+
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/Fragment3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="190dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="0dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="Appointment Date:"
+                android:textAlignment="center"
+                android:textColor="#d703082b"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+            <EditText
+                android:layout_width="1in"
+                android:layout_height="40dp"
+                android:layout_marginLeft="200dp"
+                android:background="@color/white"
+                android:id="@+id/appointmentDate"
+                android:hint="mm/dd/yyyy"/>
+
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/Fragment4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="0dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="what's bothering you lately?:"
+                android:textAlignment="center"
+                android:textColor="#d703082b"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+            <EditText
+                android:layout_width="2.1in"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="50dp"
+                android:background="@color/white"
+                android:id="@+id/appointmentNote"
+                android:hint="describe how you are feeling"/>
+
+
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/Fragment5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="410dp"
+
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft=".80in"
+                android:text="SUBMIT"
+                android:id="@+id/btnSubmitAppoint"/>
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <!-- Navigation drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
