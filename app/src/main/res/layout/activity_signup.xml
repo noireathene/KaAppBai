@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signup">
+
+    <EditText
+        android:layout_width="1.5in"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:hint="full name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop=".5in" />
+    <EditText
+        android:layout_width="1.5in"
+        android:layout_height="wrap_content"
+        android:id="@+id/age"
+        android:hint="age"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/name" />
+    <EditText
+        android:layout_width="1.5in"
+        android:layout_height="wrap_content"
+        android:id="@+id/birthdate"
+        android:hint="birthdate mm/dd/yyyy"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/age" />
+    <EditText
+        android:layout_width="1.5in"
+        android:layout_height="wrap_content"
+        android:id="@+id/email"
+        android:hint="email address"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/birthdate" />
+    <EditText
+        android:layout_width="1.5in"
+        android:layout_height="wrap_content"
+        android:id="@+id/conemail"
+        android:hint="confirm email address"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/email" />
+    <EditText
+        android:layout_width="1.5in"
+        android:layout_height="wrap_content"
+        android:id="@+id/password"
+        android:hint="password"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/conemail"
+        android:password="true"/>
+    <EditText
+        android:layout_width="1.5in"
+        android:layout_height="wrap_content"
+        android:id="@+id/conpassword"
+        android:hint="confirm password"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/password"
+        android:password="true"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signupbtn"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/conpassword"
+        android:layout_marginTop=".2in"
+        android:text="SIGN UP "/>
+
+
+</RelativeLayout>
