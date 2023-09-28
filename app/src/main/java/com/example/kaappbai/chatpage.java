@@ -3,6 +3,9 @@ package com.example.kaappbai;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,32 +18,35 @@ public class chatpage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatpage);
 
-        ChatbotService chatbotService = RetrofitClient.getInstance().create(ChatbotService.class);
+        EditText userInputEditText;
+        FrameLayout sendButton;
 
-// Create a ChatbotRequest object with the user's message
-        ChatbotRequest request = new ChatbotRequest("Hello!");
+        // Initialize views
+        userInputEditText = findViewById(R.id.inputMessage);
+        sendButton = findViewById(R.id.layoutSend);
+       // chatbotResponseTextView = findViewById(R.id.chatbotResponseTextView);
 
-// Send the request to the chatbot
-        Call<ChatbotResponse> call = chatbotService.sendMessage(request);
+        // Initialize ChatbotManager
+        ChatbotManager chatbotManager = new ChatbotManager();
 
-        call.enqueue(new Callback<ChatbotResponse>() {
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<ChatbotResponse> call, Response<ChatbotResponse> response) {
-                if (response.isSuccessful()) {
-                    ChatbotResponse chatbotResponse = response.body();
-                    String reply = chatbotResponse.getReply();
+            public void onClick(View view) {
+                // Get user input message
+                String userMessage = userInputEditText.getText().toString();
 
-                    // Handle the chatbot's reply (e.g., display it in your app's UI)
-                } else {
-                    // Handle HTTP error (e.g., show an error message)
-                }
-            }
+                // Send user message to the chatbot
+                chatbotManager.sendMessageToChatbot(userMessage, new ChatbotManager.ChatbotResponseListener() {
+                    @Override
+                    public void onResponseReceived(String response) {
+                        // Display the bot's response in the TextView
+                        //chatbotResponseTextView.setText(response);
+                    }
+                });
 
-            @Override
-            public void onFailure(Call<ChatbotResponse> call, Throwable t) {
-                // Handle network or other errors
+                // Clear the user input field
+                userInputEditText.setText("");
             }
         });
-
     }
 }
