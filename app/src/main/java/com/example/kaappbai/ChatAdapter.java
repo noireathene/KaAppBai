@@ -1,6 +1,5 @@
 package com.example.kaappbai;
 
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
+    private static final int RECEIVED_MESSAGE = 1;
+    private static final int SENT_MESSAGE = 2;
     private List<ChatMessage> chatMessages;
 
     public ChatAdapter(List<ChatMessage> chatMessages) {
@@ -19,8 +20,21 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        int layoutResId;
+        switch (viewType) {
+            case RECEIVED_MESSAGE:
+                layoutResId = R.layout.received_message_layout;
+                break;
+            case SENT_MESSAGE:
+                layoutResId = R.layout.sent_message_layout;
+                break;
+            default:
+                layoutResId = R.layout.default_message_layout;
+                break;
+        }
+
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.drawable.background_receive_message, parent, false);
+                .inflate(layoutResId, parent, false);
         return new ViewHolder(view);
     }
 
@@ -36,123 +50,20 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         return chatMessages.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        ChatMessage message = chatMessages.get(position);
+        return message.isSent() ? SENT_MESSAGE : RECEIVED_MESSAGE;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView senderTextView;
         public TextView messageTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-          //  senderTextView = itemView.findViewById(R.id.senderTextView);
-          //  messageTextView = itemView.findViewById(R.id.messageTextView);
+            senderTextView = itemView.findViewById(R.id.senderTextView);
+            messageTextView = itemView.findViewById(R.id.messageTextView);
         }
     }
 }
-
-/*import android.view.LayoutInflater;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-
-
-import java.util.List;
-
-
-public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-
-
-    private final List<ChatMessage> chatMessages;
-    private final String senderId;
-
-    public static final int VIEW_TYPE_SENT = 1;
-    public static final int VIEW_TYPE_RECEIVED = 2;
-
-    public ChatAdapter(List<ChatMessage> chatMessages, String senderId) {
-        this.chatMessages = chatMessages;
-        this.senderId = senderId;
-    }
-
-    @NonNull
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if(viewType == VIEW_TYPE_SENT){
-            return new SentMessageViewHolder(
-                    ItemContainerSentMessageBinding.inflate(
-                            LayoutInflater.from(parent.getContext()),
-                            parent, false
-                    )
-            );
-        } else {
-            return new ReceivedMessageViewHolder(
-                    ItemContainerReceiveMessageBinding.inflate(
-                            LayoutInflater.from(parent.getContext()),
-                            parent, false
-                    )
-            );
-        }
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-        if(getItemViewType(position) == VIEW_TYPE_SENT){
-            ((SentMessageViewHolder) holder).setData(chatMessages.get(position));
-        } else {
-            ((ReceivedMessageViewHolder) holder).setData(chatMessages.get(position));
-        }
-    }
-
-    @Override
-    public int getItemCount()   {
-        return chatMessages.size();
-    }
-    @Override
-    public int getItemViewType(int position){
-        if(chatMessages.get(position).senderId.equals(senderId)){
-            return VIEW_TYPE_SENT;
-        }else{
-            return VIEW_TYPE_RECEIVED;
-        }
-    }
-
-    static class SentMessageViewHolder extends RecyclerView.ViewHolder{
-
-        private final ItemContainerSentMessageBinding binding;
-
-        SentMessageViewHolder(ItemContainerSentMessageBinding itemContainerSentMessageBinding){
-            super(itemContainerSentMessageBinding.getRoot());
-            binding = itemContainerSentMessageBinding;
-        }
-
-        void setData(ChatMessage chatMessage){
-            binding.textMessage.setText(chatMessage.message);
-            binding.textDateTime.setText(chatMessage.dateTime);
-        }
-    }
-
-    static class ReceivedMessageViewHolder extends RecyclerView.ViewHolder{
-        private final ItemContainerReceiveMessageBinding binding;
-
-        ReceivedMessageViewHolder(ItemContainerReceiveMessageBinding itemContainerReceiveMessageBinding){
-            super(itemContainerReceiveMessageBinding.getRoot());
-            binding = itemContainerReceiveMessageBinding;
-        }
-
-        void setData(ChatMessage chatMessage){
-            binding.textMessage.setText(chatMessage.message);
-            binding.textDateTime.setText(chatMessage.dateTime);
-        }
-    }
-
-    private static class ItemContainerSentMessageBinding {
-        public static ItemContainerSentMessageBinding inflate(LayoutInflater from, ViewGroup parent, boolean b) {
-        }
-    }
-
-    private static class ItemContainerReceiveMessageBinding {
-        public static ItemContainerReceiveMessageBinding inflate(LayoutInflater from, ViewGroup parent, boolean b) {
-        }
-    }
-}
- */

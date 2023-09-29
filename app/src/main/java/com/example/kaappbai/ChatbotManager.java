@@ -13,7 +13,7 @@ public class ChatbotManager {
 
     public ChatbotManager() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://your-azure-app-url.com/rasa-api-endpoint/") // Replace with your API endpoint
+                .baseUrl("https://chatbotkaappbai.azurewebsites.net") // Replace with your API endpoint
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -23,10 +23,8 @@ public class ChatbotManager {
     public void sendMessageToChatbot(String userMessage, final ChatbotResponseListener listener) {
         ChatbotRequest message = new ChatbotRequest(userMessage);
 
-        Call<ChatbotResponse> call = chatbotService.sendMessage(BASE_URL, message);
+        Call<ChatbotResponse> call = chatbotService.sendMessage(BASE_URL, message); // Replace BASE_URL with your actual URL
         call.enqueue(new Callback<ChatbotResponse>() {
-
-
             @Override
             public void onResponse(Call<ChatbotResponse> call, Response<ChatbotResponse> response) {
                 if (response.isSuccessful()) {
@@ -40,9 +38,8 @@ public class ChatbotManager {
 
             @Override
             public void onFailure(Call<ChatbotResponse> call, Throwable t) {
-
+                // Handle network call failure here
             }
-
         });
     }
 
