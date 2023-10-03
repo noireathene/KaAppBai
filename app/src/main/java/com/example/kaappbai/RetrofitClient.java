@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static Retrofit retrofit;
-    static final String BASE_URL = "https://chatbotkaappbai.azurewebsites.net"; // Replace with your server's base URL
+    static final String BASE_URL = "https://chatbotkaappbai-kaappbai.azurewebsites.net"; // Replace with your server's base URL
 
     public static Retrofit getInstance() {
         if (retrofit == null) {

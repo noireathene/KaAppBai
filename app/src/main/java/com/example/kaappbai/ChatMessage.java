@@ -1,5 +1,8 @@
 package com.example.kaappbai;
 
+import android.util.Log;
+import static com.example.kaappbai.login.TAG;
+
 public class ChatMessage {
     private String sender;
     private String message;
@@ -20,6 +23,7 @@ public class ChatMessage {
     }
 
     public boolean isSent() {
+        Log.d(TAG, "isSent: true");
         return sent; // Return the value of the 'sent' field
     }
 }

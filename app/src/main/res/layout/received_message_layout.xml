@@ -1,30 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/receivedMessageLayout"
-    android:layout_width="0dp"
+<!-- received_message_layout.xml -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginTop="8dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/viewSupporter"
+    android:orientation="vertical"
     android:background="@drawable/background_receive_message">
 
+    <!-- Sender's name -->
+    <!--
     <TextView
-        android:id="@+id/senderTextView"
+        android:id="@+id/receivedSenderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sender"
+        android:text="Sender Name"
         android:textColor="#000000"
-        android:padding="8dp"/>
+        android:textSize="12sp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="2dp"
+        android:visibility="gone" />
+        -->
 
+    <!-- Message content -->
     <TextView
-        android:id="@+id/messageTextView"
+        android:id="@+id/receivedMessageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Received Message"
+        android:text="Received Message Text"
         android:textColor="#000000"
-        android:padding="8dp"/>
+        android:textSize="16sp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" />
 </LinearLayout>

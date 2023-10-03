@@ -4,11 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +17,7 @@ public class chatpage extends AppCompatActivity {
     private RecyclerView chatRecyclerView;
     private ChatAdapter chatAdapter;
     private List<ChatMessage> chatMessages;
+    private ChatbotManager chatbotManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +29,7 @@ public class chatpage extends AppCompatActivity {
         sendButton = findViewById(R.id.layoutSend);
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
 
-        // Initialize ChatbotManager
-        ChatbotManager chatbotManager = new ChatbotManager();
-
-        // Initialize chatMessages list
+        // Initialize chatMessages list (make sure it's not null)
         chatMessages = new ArrayList<>();
 
         // Initialize chatAdapter and set it to RecyclerView
@@ -41,8 +37,11 @@ public class chatpage extends AppCompatActivity {
         chatRecyclerView.setAdapter(chatAdapter);
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Set the initial visibility of chatRecyclerView to "visible"
+        // Set the initial visibility of chatRecyclerView to "VISIBLE"
         chatRecyclerView.setVisibility(View.VISIBLE);
+
+        // Initialize ChatbotManager
+        chatbotManager = new ChatbotManager(chatAdapter, chatMessages);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +55,7 @@ public class chatpage extends AppCompatActivity {
                     ChatMessage sentMessage = new ChatMessage("You", userMessage, true);
 
                     // Add the sent message to the chatMessages list
-                    chatMessages.add(sentMessage);
+                    chatAdapter.addMessage(sentMessage);
 
                     // Notify the adapter that the data has changed
                     chatAdapter.notifyDataSetChanged();
@@ -64,17 +63,20 @@ public class chatpage extends AppCompatActivity {
                     // Clear the user input field
                     userInputEditText.setText("");
 
-                    // Handle the chatbot response (you can add your logic here)
-                    String botResponse = chatbotManager.generateResponse(userMessage);
+                    // Use the ChatbotManager to send the user message to the chatbot
+                    chatbotManager.sendMessageToChatbot(userMessage, new ChatbotManager.ChatbotResponseListener() {
+                        @Override
+                        public void onResponseReceived(String botResponse) {
+                            // Create a received message (chatbot's response)
+                            ChatMessage receivedMessage = new ChatMessage("Chatbot", botResponse, true);
 
-                    // Create a received message (chatbot's response)
-                    ChatMessage receivedMessage = new ChatMessage("Chatbot", botResponse, false);
+                            // Add the received message to the chatMessages list
+                            chatAdapter.addMessage(receivedMessage);
 
-                    // Add the received message to the chatMessages list
-                    chatMessages.add(receivedMessage);
-
-                    // Notify the adapter that the data has changed
-                    chatAdapter.notifyDataSetChanged();
+                            // Notify the adapter that the data has changed
+                            chatAdapter.notifyDataSetChanged();
+                        }
+                    });
                 }
             }
         });

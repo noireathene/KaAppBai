@@ -37,7 +37,7 @@ public class login extends AppCompatActivity {
 
 
     private PreferenceManager preferenceManager;
-    private static final String TAG = "GoogleActivity";
+    static final String TAG = "GoogleActivity";
 
     private static final int RC_SIGN_IN = 2;
 
