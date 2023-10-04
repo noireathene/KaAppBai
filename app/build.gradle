@@ -6,6 +6,7 @@ plugins {
 android {
     packagingOptions {
         resources.excludes.add("META-INF/*")
+        exclude 'google/protobuf/field_mask.proto'
     }
 
     namespace 'com.example.kaappbai'
@@ -42,30 +43,57 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
 
     // Firebase Core
-    implementation 'com.google.firebase:firebase-analytics'
+    implementation ('com.google.firebase:firebase-analytics') {
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+        exclude group: "com.google.api.grpc", module: "proto-google-common-protos"
+            }
+
 
     // Firebase Firestore
-    implementation 'com.google.firebase:firebase-firestore'
+    implementation('com.google.firebase:firebase-firestore') {
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+        exclude group: "com.google.api.grpc", module: "proto-google-common-protos"
+    }
 
     // Firebase Authentication
-    implementation 'com.google.firebase:firebase-auth'
+    implementation ('com.google.firebase:firebase-auth') {
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+        exclude group: "com.google.api.grpc", module: "proto-google-common-protos"
+    }
+
 
     // Firebase Cloud Messaging (FCM)
-    implementation 'com.google.firebase:firebase-messaging'
+    implementation ('com.google.firebase:firebase-messaging') {
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+        exclude group: "com.google.api.grpc", module: "proto-google-common-protos"
+    }
+
 
     // Google Play services authentication
-    implementation 'com.google.android.gms:play-services-auth:20.7.0'
-    implementation files('libs\\javax.mail.jar')
+    implementation ('com.google.android.gms:play-services-auth:20.7.0') {
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+        exclude group: "com.google.api.grpc", module: "proto-google-common-protos"
+    }
 
+
+    // Google Cloud Dialogflow
+    implementation('com.google.cloud:google-cloud-dialogflow:2.3.0') {
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+        exclude group: "com.google.api.grpc", module: "proto-google-common-protos"
+    }
 
     // Test dependencies
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    //retrofit
+    // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // Google Auth Library for OAuth2
+   // implementation 'com.google.auth:google-auth-library-oauth2-http:1.3.0'
+
 
 
 
@@ -73,5 +101,3 @@ dependencies {
 
 
 
-// Add this at the bottom of the file
-apply plugin: 'com.google.gms.google-services'

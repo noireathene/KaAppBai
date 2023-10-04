@@ -4,11 +4,65 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
+
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+import android.content.Context;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
+public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
+    private List<ChatMessage> messages;
+    private Context context;
+
+    public ChatAdapter(List<ChatMessage> messages) {
+        this.context = context;
+        this.messages = messages;
+    }
+
+    @Override
+    public int getItemCount() {
+        return messages.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return messages.get(position).isBotMessage() ? 0 : 1;
+    }
+
+    @Override
+    public ChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        int layoutId = viewType == 0 ? R.layout.received_message_layout : R.layout.sent_message_layout;
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
+        return new ChatViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(ChatViewHolder holder, int position) {
+        ChatMessage message = messages.get(position);
+        if (message.isBotMessage()) {
+            holder.receivedmessageTextView.setVisibility(View.VISIBLE);
+            holder.sentmessageTextView.setVisibility(View.GONE);
+            holder.receivedmessageTextView.setText(message.getMessageText());
+        } else {
+            holder.sentmessageTextView.setVisibility(View.VISIBLE);
+            holder.receivedmessageTextView.setVisibility(View.GONE);
+            holder.sentmessageTextView.setText(message.getMessageText());
+        }
+    }
+
+    class ChatViewHolder extends RecyclerView.ViewHolder {
+        TextView receivedmessageTextView, sentmessageTextView;
+
+        ChatViewHolder(View itemView) {
+            super(itemView);
+            receivedmessageTextView = itemView.findViewById(R.id.receivedMessageTextView);
+            sentmessageTextView = itemView.findViewById(R.id.sentMessageTextView);
+        }
+    }
+}
+
+
+
+/*public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     private static final int RECEIVED_MESSAGE = 1;
     private static final int SENT_MESSAGE = 2;
     private List<ChatMessage> chatMessages;
@@ -152,3 +206,4 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         }
     }
 }
+*/

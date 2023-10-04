@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.List;
 
 
-public class ChatbotManager {
+/*public class ChatbotManager {
     private ChatbotService chatbotService;
     private List<ChatMessage> chatMessages;
     private ChatAdapter chatAdapter;
@@ -43,7 +43,7 @@ public class ChatbotManager {
                     String botMessage = botResponse != null ? botResponse.getReply() : "No response from bot.";
 
                     // Create a new ChatMessage for the received message and add it to the chatAdapter's data list
-                    ChatMessage receivedMessage = new ChatMessage("Bot", botMessage, true);
+                    ChatMessage receivedMessage = new ChatMessage(botMessage, true);
                     chatAdapter.addMessage(receivedMessage);
 
                     // Notify the adapter that the data set has changed
@@ -70,5 +70,5 @@ public class ChatbotManager {
 
     public interface ChatbotResponseListener {
         void onResponseReceived(String response);
-    }
-}
+    }*/
+

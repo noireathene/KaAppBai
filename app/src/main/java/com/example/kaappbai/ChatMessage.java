@@ -3,7 +3,27 @@ package com.example.kaappbai;
 import android.util.Log;
 import static com.example.kaappbai.login.TAG;
 
+
 public class ChatMessage {
+    private String messageText;
+    private boolean isBotMessage;
+
+    public ChatMessage(String messageText, boolean isBotMessage) {
+        this.messageText = messageText;
+        this.isBotMessage = isBotMessage;
+    }
+
+    public String getMessageText() {
+        return messageText;
+    }
+
+    public boolean isBotMessage() {
+        return isBotMessage;
+    }
+}
+
+
+/*public class ChatMessage {
     private String sender;
     private String message;
     private boolean sent; // Add a field to indicate whether the message is sent
@@ -25,5 +45,5 @@ public class ChatMessage {
     public boolean isSent() {
         Log.d(TAG, "isSent: true");
         return sent; // Return the value of the 'sent' field
-    }
-}
+    }*/
+

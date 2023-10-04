@@ -2,7 +2,7 @@ package com.example.kaappbai;
 
 import java.util.Properties;
 
-import javax.mail.*;
+/*import javax.mail.*;
 import javax.mail.internet.*;
 
 public class EmailSenderActivity {
@@ -53,5 +53,5 @@ public class EmailSenderActivity {
             System.err.println("Email sending failed. Error: " + e.getMessage());
         }
     }
-}
+}*/
 
